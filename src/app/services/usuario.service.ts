@@ -73,6 +73,18 @@ export class UsuarioService {
     )
   }
 
+  exitsByUsername(username: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.url}/username/${username}`);
+  }
+
+  exitsByCedula(cedula: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.url}/cedula/${cedula}`);
+  }
+
+  exitsByEmail(email: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.url}/email/${email}`);
+  }
+
   subirFoto(archivo: File, idUsuario): Observable<HttpEvent<{}>> {
     let formData = new FormData();
     formData.append('archivo', archivo);

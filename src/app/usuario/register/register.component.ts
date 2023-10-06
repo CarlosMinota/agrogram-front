@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { NotifierModule, NotifierService } from 'angular-notifier';
 import { Ciudad } from 'src/app/models/ciudad';
 import { Departamento } from 'src/app/models/departamento';
 import { Usuario } from 'src/app/models/usuario';
@@ -11,7 +12,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   selector: 'app-register',
   templateUrl: './register.component.html',
   standalone: true,
-  imports:[FormsModule, ReactiveFormsModule, CommonModule, RouterModule]
+  imports:[FormsModule, ReactiveFormsModule, CommonModule, RouterModule, NotifierModule]
 })
 export class RegisterComponent {
 
@@ -19,9 +20,13 @@ export class RegisterComponent {
   public errores: string[];
   public departamentos: Departamento[];
   public ciudades: Ciudad[];
+  private notifier: NotifierService;
 
   constructor(private usuarioService: UsuarioService,
-    private router: Router){}
+    private router: Router,
+    notifier: NotifierService){
+      this.notifier = notifier;
+    }
 
   ngOnInit(): void {
     this.usuarioService.getDepartamentos().subscribe(response => {
@@ -44,10 +49,39 @@ export class RegisterComponent {
     this.usuarioService.crearUsuario(this.usuario).subscribe({
       next: (usuario) => {
         this.router.navigate(['/home']);
+        this.showNotification('success', 'El registro ha sido exitoso')
       },
       error: (err) => {
         this.errores = err.error.errors as string[]
       }
     })
+  }
+
+  public exitsByUsername(): void {
+    this.usuarioService.exitsByUsername(this.usuario.username).subscribe(response => {
+      if (response.mensaje) {
+        this.showNotification('error', response.mensaje);
+      }
+    });
+  }
+
+  public exitsByCedula(): void {
+    this.usuarioService.exitsByCedula(this.usuario.cedula).subscribe(response => {
+      if (response.mensaje) {
+        this.showNotification('error', response.mensaje);
+      }
+    });
+  }
+
+  public exitsByEmail(): void {
+    this.usuarioService.exitsByEmail(this.usuario.email).subscribe(response => {
+      if (response.mensaje) {
+        this.showNotification('error', response.mensaje);
+      }
+    });
+  }
+
+  public showNotification(type: string, message: string): void {
+    this.notifier.notify(type, message);
   }
 }
