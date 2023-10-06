@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { NotifierModule, NotifierService } from 'angular-notifier';
 import { Ciudad } from 'src/app/models/ciudad';
@@ -21,10 +21,28 @@ export class RegisterComponent {
   public departamentos: Departamento[];
   public ciudades: Ciudad[];
   private notifier: NotifierService;
+  public submitted: boolean = false;
+  public mensaje: string = 'El campo es requerido'
+  public mensajeContrasenaMin: string = 'La contraseña debe ser mayor a 5 caracteres';
+  public mensajeContrasenaMax: string = 'La contraseña no debe exceder los 16 caracteres';
+  public mensajeUsernameMin: string = 'El nombre de usuario debe ser mayor a 3 caracteres';
+  public mensajeUsernameMax: string = 'El nombre de usuario no debe exceder los 40 caracteres';
+
+  form: FormGroup = new FormGroup({
+    nombreUsuario: new FormControl(''),
+    username: new FormControl(''),
+    telefono: new FormControl(''),
+    email: new FormControl(''),
+    cedula: new FormControl(''),
+    departamento: new FormControl(''),
+    ciudad: new FormControl(''),
+    contrasena: new FormControl(''),
+  });
 
   constructor(private usuarioService: UsuarioService,
     private router: Router,
-    notifier: NotifierService){
+    notifier: NotifierService,
+    private formBuilder: FormBuilder){
       this.notifier = notifier;
     }
 
@@ -33,6 +51,26 @@ export class RegisterComponent {
       this.departamentos = response.departamentos;
     });
 
+    this.form = this.formBuilder.group({
+      nombreUsuario: ['', Validators.required],
+      username: ['', [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(40)
+        ]
+      ],
+      telefono: ['', Validators.required],
+      email: ['', Validators.required],
+      cedula: ['', Validators.required],
+      departamento: ['', Validators.required],
+      ciudad: ['', Validators.required],
+      contrasena: ['', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(15)
+        ]
+      ],
+    })
   }
  
   public listarCiudadesDepartamento(idDepartamento: number): void {
@@ -43,6 +81,12 @@ export class RegisterComponent {
 
   selectedOrgMod(valor) {
     this.listarCiudadesDepartamento(valor.target.value);
+  }
+
+  public validacionesUsuario(): void {
+    this.exitsByUsername();
+    this.exitsByCedula();
+    this.exitsByEmail();
   }
 
   public createUsuario(): void {
@@ -83,5 +127,17 @@ export class RegisterComponent {
 
   public showNotification(type: string, message: string): void {
     this.notifier.notify(type, message);
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.form.controls;
+  }
+
+  onSubmit(): void {
+    this.submitted = true;
+    console.log(JSON.stringify(this.form.value, null, 2));
+    if (this.form.invalid) {
+      return;
+    }
   }
 }
