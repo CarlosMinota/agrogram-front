@@ -101,17 +101,17 @@
           *ngIf="options.layout === 'horizontal'; else vheader"
           class="w-100"
         >
-          <app-horizontal-navigation
+          <app-header-horizontal
             class="w-100 d-flex align-items-center justify-content-between"
           >
-          </app-horizontal-navigation>
+          </app-header-horizontal>
         </div>
 
         <!-- Vertical Header -->
         <ng-template #vheader>
           <div class="w-100">
-            <app-vertical-navigation (toggleSidebar)="toggleSidebarType()">
-            </app-vertical-navigation>
+            <app-header-vertical (toggleSidebar)="toggleSidebarType()">
+            </app-header-vertical>
           </div>
         </ng-template>
       </div>
@@ -128,17 +128,17 @@
   >
     <!-- Sidebar scroll-->
     <div *ngIf="options.layout === 'horizontal'; else vlayout">
-      <app-horizontal-sidebar></app-horizontal-sidebar>
+      <app-sidebar-horizontal></app-sidebar-horizontal>
     </div>
 
     <!-- Horizontal Header -->
     <ng-template #vlayout>
       <ng-scrollbar class="scroll-sidebar">
-        <app-vertical-sidebar
+        <app-sidebar-vertical
           [showClass]="showMobileMenu"
           (notify)="handleClick($event)"
         >
-        </app-vertical-sidebar>
+        </app-sidebar-vertical>
       </ng-scrollbar>
     </ng-template>
     <!-- End Sidebar scroll-->
@@ -170,7 +170,7 @@
     <!-- footer -->
     <!-- ============================================================== -->
     <footer class="footer">
-      © copyright Admin Pro Angular by
+      © copyright Alejandro Forero Cardona - Carlos Arturo Minotal Lopez
       <a href="https://www.wrappixel.com/">wrappixel.com</a>
     </footer>
     <!-- ============================================================== -->

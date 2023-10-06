@@ -9,7 +9,7 @@ export const Approutes: Routes = [
     path: '',
     component: FullComponent,
     children: [
-      { path: '', redirectTo: '/dashboard/dashboard1', pathMatch: 'full' },
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
       {
         path: 'dashboard',
         loadChildren: () =>
@@ -67,6 +67,21 @@ export const Approutes: Routes = [
           import('./starter/starter.module').then((m) => m.StarterModule),
       },
       {
+        path: 'home',
+        loadChildren: () =>
+          import('./landing/landing.module').then((m) => m.LandingModule),
+      },
+      {
+        path: 'usuarios',
+        loadChildren: () =>
+          import('./usuario/usuario.module').then((m) => m.UsuarioModule),
+      },
+      {
+        path: 'productos',
+        loadChildren: () =>
+          import('./productos/productos.module').then((m) => m.ProductosModule),
+      },
+      {
         path: 'widgets',
         loadChildren: () =>
           import('./widgets/widgets.module').then((m) => m.WidgetsModule),
@@ -99,6 +114,19 @@ export const Approutes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: '',
+    component: BlankComponent,
+    children: [
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('./usuario/usuario.module').then(
+            (m) => m.UsuarioModule
+          )
+      }
+    ]
   },
   {
     path: '**',

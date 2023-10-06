@@ -5,8 +5,12 @@ import { Router, RouterModule } from '@angular/router';
 import { NgbCollapseModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { BreadcrumbComponent } from 'src/app/shared/breadcrumb/breadcrumb.component';
+import { HeaderHorizontalComponent } from 'src/app/shared/header-horizontal/header-horizontal.component';
+import { HeaderVerticalComponent } from 'src/app/shared/header-vertical/header-vertical.component';
 import { HorizontalNavigationComponent } from 'src/app/shared/horizontal-header/horizontal-navigation.component';
 import { HorizontalSidebarComponent } from 'src/app/shared/horizontal-sidebar/horizontal-sidebar.component';
+import { SidebarHorizontalComponent } from 'src/app/shared/sidebar-horizontal/sidebar-horizontal.component';
+import { SidebarVerticalComponent } from 'src/app/shared/sidebar-vertical/sidebar-vertical.component';
 import { VerticalNavigationComponent } from 'src/app/shared/vertical-header/vertical-navigation.component';
 import { VerticalSidebarComponent } from 'src/app/shared/vertical-sidebar/vertical-sidebar.component';
 declare var $: any;
@@ -17,10 +21,14 @@ declare var $: any;
   imports: [
     RouterModule,
     VerticalNavigationComponent,
+    HeaderVerticalComponent,
     VerticalSidebarComponent,
+    SidebarVerticalComponent,
     BreadcrumbComponent,
     HorizontalNavigationComponent,
+    HeaderHorizontalComponent,
     HorizontalSidebarComponent,
+    SidebarHorizontalComponent,
     NgScrollbarModule,
     NgbNavModule,
     FormsModule,

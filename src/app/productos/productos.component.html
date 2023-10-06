@@ -1,0 +1,25 @@
+<div class="row">
+    <!-- column -->
+    <div class="col-lg-3 col-md-6" *ngFor="let producto of productos">
+        <!-- Card -->
+        <div class="card">
+            <ngb-carousel *ngIf="producto.imagenes.length > 0">
+                <ng-template ngbSlide *ngFor="let imagen of producto.imagenes">
+                  <div class="picsum-img-wrapper">
+                    <img class="img-thumbnail" src="{{url}}{{imagen.imagen}}" alt="{{imagen.imagen}}" />
+                  </div>
+                </ng-template>
+            </ngb-carousel>
+            <div class="picsum-img-wrapper" *ngIf="producto.imagenes.length == 0">
+                <img class="img-thumbnail" src="{{noImagen}}" alt="{{noImagen}}" />
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">{{producto.nombreProducto}}</h4>
+                <p class="card-text">{{producto.descripcion}}</p>
+                <a [routerLink]="['/productos/detalle-producto', producto.idProducto]" class="btn btn-primary">Ver
+                    detalle del producto</a>
+            </div>
+        </div>
+        <!-- Card -->
+    </div>
+</div>

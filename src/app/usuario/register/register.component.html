@@ -1,0 +1,77 @@
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(assets/images/Log.jpg) no-repeat center center;">
+    <div class="auth-box on-sidebar m-3 m-md-0">
+        <div>
+            <div class="text-center">
+                <span class="db"><img class="img-thumbnail" src="assets/images/agrologo.png" alt="logo" /></span>
+                <h5 class="font-medium mb-4">AGROGRAM</h5>
+            </div>
+            <!-- Form -->
+            <div class="row">
+                <div class="col-12">
+                    <form class="form-horizontal mt-3">
+                        <div class="mb-3 row ">
+                            <div class="col-12 ">
+                                <input class="form-control" type="text" required=" " [(ngModel)]="usuario.nombreUsuario" name="nombre" placeholder="Nombre completo">
+                            </div>
+                        </div>
+                        <div class="mb-3 row ">
+                            <div class="col-12 ">
+                                <input class="form-control" type="text" required=" " [(ngModel)]="usuario.username" name="username" placeholder="Nombre de usuario">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-12 ">
+                                <input class="form-control" type="text" required=" " [(ngModel)]="usuario.telefono" name="telefono" placeholder="Telefono">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-12 ">
+                                <input class="form-control" type="text" required=" " [(ngModel)]="usuario.email" name="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-12 ">
+                                <input class="form-control" type="text" required=" " [(ngModel)]="usuario.cedula" name="cedula" placeholder="Cedula">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-12 ">
+                                <div class="form-group">
+                                    <select class="form-select mr-sm-2" id="inlineFormCustomSelect" name="departamento" (change)="selectedOrgMod($event)">
+                                        <option [ngValue]="undefined">Seleccionar departamento</option>
+                                        <option *ngFor="let departamento of departamentos" [value]="departamento.idDepartamento">{{departamento.nombreDepartamento}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-12 ">
+                                <div class="form-group">
+                                    <select class="form-select mr-sm-2" id="inlineFormCustomSelectd" [(ngModel)]="usuario.ciudad" name="ciudad">
+                                        <option [ngValue]="undefined">Seleccionar la ciudad</option>
+                                        <option *ngFor="let ciudad of ciudades" [ngValue]="ciudad.idCiudad">{{ciudad.nombreCiudad}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-12 ">
+                                <input class="form-control" type="password" required=" " name="contrasena" [(ngModel)]="usuario.contrasena" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="mb-3 text-center ">
+                            <div class="col-xs-12 mb-4">
+                                <a class="btn d-block w-100 btn-lg btn-info" (click)="createUsuario()">Registrarme</a>
+                            </div>
+                        </div>
+                        <div class="mb-3 mb-0 mt-2 ">
+                            <div class="col-sm-12 text-center ">
+                                ¿Ya estas registrado? <a [routerLink]="['/auth/login']" class="text-info ms-1 "><b>Ingresar</b></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
