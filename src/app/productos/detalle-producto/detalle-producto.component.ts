@@ -6,7 +6,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { NgbCarousel, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/app/environments/environment';
 import { ImagenProducto } from 'src/app/models/imagen-producto';
-import { Productos } from 'src/app/models/productos';
+import { Producto } from 'src/app/models/producto';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
@@ -18,7 +19,7 @@ import { ProductoService } from 'src/app/services/producto.service';
 })
 export class DetalleProductoComponent {
 
-  public producto: Productos;
+  public producto: Producto;
   public urlImagen = environment.urlImagenProducto;
   public noImagen = environment.urlNoImagenProducto;
   public fotoSeleccionada: File;
@@ -26,6 +27,7 @@ export class DetalleProductoComponent {
 
   constructor(private productoService: ProductoService,
     private activatedRoute: ActivatedRoute,
+    public authService: AuthService,
     public decimalPipe: DecimalPipe){}
 
 
@@ -33,7 +35,7 @@ export class DetalleProductoComponent {
     this.activatedRoute.paramMap.subscribe(params =>{
       let idProducto = +params.get('id');
       this.productoService.getProducto(idProducto).subscribe(response =>{
-        this.producto = response.producto as Productos;
+        this.producto = response.producto as Producto;
       })
     })
   }

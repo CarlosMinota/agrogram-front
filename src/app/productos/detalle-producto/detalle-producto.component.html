@@ -1,1 +1,66 @@
-<p>detalle-producto works!</p>
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">{{producto.nombreProducto}}</h2>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="white-box text-center">
+                            <ngb-carousel *ngIf="producto.imagenes.length > 0">
+                                <ng-template ngbSlide *ngFor="let imagen of producto.imagenes">
+                                    <div class="picsum-img-wrapper">
+                                        <img class="img-thumbnail mt-5" src="{{urlImagen}}{{imagen.imagen}}"
+                                            alt="{{imagen.imagen}}" />
+                                    </div>
+                                </ng-template>
+                            </ngb-carousel>
+                            <div class="picsum-img-wrapper" *ngIf="producto.imagenes.length == 0">
+                                <img class="img-thumbnail mt-5" src="{{noImagen}}" alt="{{noImagen}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-6">
+                        <h3 class="p-2-title mt-1 pt-3">Descripción del Producto</h3>
+                        <p class="mb-1">{{producto.descripcion}}</p>
+                        <hr>
+                        <h3 class="p-2-title mt-1 pt-3">Informacion sobre Producción</h3>
+                        <p class="mb-1">{{producto.infoProduccion}}</p>
+                        <h3 class="mt-1 pt-3 mb-4">Precio libra - COP$ {{producto.precio | number :'1.2-2'}}</h3>
+                        <div class="buton-group">
+                            <button *ngIf="producto.usuario.idUsuario == authService.usuario.idUsuario" type="button"
+                                class="btn btn-rounded btn-outline-success">
+                                Editar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h3 class="p-2-title mt-1 mb-3 pt-3">Información general</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td width="390">Productor</td>
+                                        <td> <a
+                                                [routerLink]="['/usuarios/detalle-perfil', producto.usuario.idUsuario]">{{producto.usuario.nombreUsuario}}</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Categoria</td>
+                                        <td>{{producto.categoria.nombreCategoria}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tipo presentación</td>
+                                        <td>{{producto.presentacionProducto.tipoPresentacion}} -
+                                            {{producto.presentacionProducto.unidadOrden}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+</div>

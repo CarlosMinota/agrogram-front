@@ -29,7 +29,7 @@ export const ProductosRoutes: Routes = [
                 }
             },
             {
-                path: 'form-producto/:usuarioId',
+                path: 'form-producto',
                 component: FormProductoComponent,
                 data: {
                     title: 'Registrar un nuevo producto',

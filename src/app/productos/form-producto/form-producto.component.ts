@@ -1,18 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Validators } from 'ngx-editor';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Categoria } from 'src/app/models/categoria';
 import { PresentacionProducto } from 'src/app/models/presentacion-producto';
 import { ProductoDto } from 'src/app/models/productoDto';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductoService } from 'src/app/services/producto.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-form-producto',
-  templateUrl: './form-producto.component.html'
+  templateUrl: './form-producto.component.html',
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class FormProductoComponent implements OnInit {
 
@@ -23,6 +24,7 @@ export class FormProductoComponent implements OnInit {
   public submitted = false;
   public fotoSeleccionada: File;
   public errores: string[];
+  public mensaje: string = 'El campo es requerido';
 
   form: FormGroup = new FormGroup({
     nombreProducto: new FormControl(''),
@@ -31,15 +33,12 @@ export class FormProductoComponent implements OnInit {
     presentacion: new FormControl(''),
     descripcion: new FormControl(''),
     infoProduccion: new FormControl(''),
-    imagen: new FormControl('')
   })
 
   constructor(private productoService: ProductoService,
     private router: Router,
     public authService: AuthService,
-    private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    private usuarioService: UsuarioService){}
+    private formBuilder: FormBuilder){}
 
   ngOnInit(): void {
     this.productoService.getCategorias().subscribe(categorias =>{
@@ -50,13 +49,6 @@ export class FormProductoComponent implements OnInit {
       this.presentacionProducto = presentacion as PresentacionProducto[];
     });
 
-    this.activatedRoute.paramMap.subscribe(params =>{
-      let usuarioId = +params.get('usuarioId');
-      this.usuarioService.getUsuario(usuarioId).subscribe(response =>{
-        this.producto.usuario = response.usuario.idUsuario;
-      })
-    })
-
     this.form = this.formBuilder.group({
       nombreProducto: ['', Validators.required],
       precio: ['', Validators.required],
@@ -64,7 +56,6 @@ export class FormProductoComponent implements OnInit {
       presentacion: ['', Validators.required],
       descripcion: ['', Validators.required],
       infoProduccion: ['', Validators.required],
-      imagen: ['', Validators.required]
     });
   }
 
@@ -88,9 +79,10 @@ export class FormProductoComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    this.producto.usuario = this.authService.usuario.idUsuario;
     this.productoService.crearProducto(this.producto).subscribe({
       next: (producto) => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/usuarios/detalle-perfil', this.authService.usuario.idUsuario]);
       },
       error: (err) => {
         this.errores = err.error.errors as string[]

@@ -3,7 +3,7 @@ import { ImagenProducto } from "./imagen-producto";
 import { PresentacionProducto } from "./presentacion-producto";
 import { Usuario } from "./usuario";
 
-export class Productos {
+export class Producto {
     idProducto: number;
     nombreProducto: string;
     precio: number;

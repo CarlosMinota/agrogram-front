@@ -1,7 +1,7 @@
-import { Productos } from "./productos";
+import { Producto } from "./producto";
 
 export class ImagenProducto {
     idImagen: number;
     imagen: string;
-    prodcuto: Productos;
+    prodcuto: Producto;
 }

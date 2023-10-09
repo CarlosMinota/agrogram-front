@@ -33,10 +33,12 @@ export const UsuarioRoutes: Routes = [
             {
                 path: 'register',
                 component: RegisterComponent,
+                title: 'Registro de usuario',
             },
             {
                 path: 'login',
                 component: LoginComponent,
+                title: 'Login'
             }
         ]
     }

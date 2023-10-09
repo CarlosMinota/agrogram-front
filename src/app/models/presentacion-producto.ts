@@ -1,8 +1,8 @@
-import { Productos } from "./productos";
+import { Producto } from "./producto";
 
 export class PresentacionProducto {
     idPresentacion: number;
     tipoPresentacion: string;
     unidadOrden: string;
-    prodcutos: Array<Productos> = [];
+    prodcutos: Array<Producto> = [];
 }

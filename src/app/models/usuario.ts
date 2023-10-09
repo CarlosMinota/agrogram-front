@@ -1,5 +1,5 @@
 import { Ciudad } from "./ciudad";
-import { Productos } from "./productos";
+import { Producto } from "./producto";
 
 export class Usuario {
     idUsuario: number;
@@ -12,6 +12,10 @@ export class Usuario {
     username: string;
     imagen: string;
     ciudad: Ciudad;
-    productos: Array<Productos> = [];
+    productos: Array<Producto> = [];
     roles: string[] = [];
+
+    constructor(){
+        
+    }
 }

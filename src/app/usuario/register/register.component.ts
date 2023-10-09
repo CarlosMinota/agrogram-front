@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { NotifierModule, NotifierService } from 'angular-notifier';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { Ciudad } from 'src/app/models/ciudad';
 import { Departamento } from 'src/app/models/departamento';
 import { Usuario } from 'src/app/models/usuario';
@@ -12,7 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   selector: 'app-register',
   templateUrl: './register.component.html',
   standalone: true,
-  imports:[FormsModule, ReactiveFormsModule, CommonModule, RouterModule, NotifierModule]
+  imports:[FormsModule, ReactiveFormsModule, CommonModule, RouterModule, NotifierModule, NgScrollbarModule]
 })
 export class RegisterComponent {
 
@@ -87,6 +88,7 @@ export class RegisterComponent {
     this.exitsByUsername();
     this.exitsByCedula();
     this.exitsByEmail();
+    this.createUsuario();
   }
 
   public createUsuario(): void {

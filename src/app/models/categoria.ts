@@ -1,7 +1,7 @@
-import { Productos } from "./productos";
+import { Producto } from "./producto";
 
 export class Categoria {
     idCategoria: number;
     nombreCategoria: string;
-    productos: Array<Productos> = [];
+    productos: Array<Producto> = [];
 }

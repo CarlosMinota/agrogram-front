@@ -2,7 +2,7 @@ import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { Productos } from '../models/productos';
+import { Producto } from '../models/producto';
 import { ProductoDto } from '../models/productoDto';
 
 @Injectable({
@@ -46,8 +46,8 @@ export class ProductoService {
     );
   }
 
-  updateProducto(producto: Productos): Observable<Productos> {
-    return this.httpClient.put<Productos>(`${this.url}/${producto.idProducto}`, producto).pipe(
+  updateProducto(producto: Producto): Observable<Producto> {
+    return this.httpClient.put<Producto>(`${this.url}/${producto.idProducto}`, producto).pipe(
       catchError(err => {
         if (err.status == 400) {
           return throwError(() => err)
@@ -62,8 +62,8 @@ export class ProductoService {
     );
   }
 
-  deleteProducto(id: number): Observable<Productos> {
-    return this.httpClient.delete<Productos>(`${this.url}/${id}`).pipe(
+  deleteProducto(id: number): Observable<Producto> {
+    return this.httpClient.delete<Producto>(`${this.url}/${id}`).pipe(
       catchError(err => {
         if (err.status != 401 && err.error.mensaje) {
           console.error(err.error.mensaje)
