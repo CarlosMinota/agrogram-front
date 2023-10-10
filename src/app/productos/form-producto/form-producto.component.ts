@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Categoria } from 'src/app/models/categoria';
 import { PresentacionProducto } from 'src/app/models/presentacion-producto';
+import { Producto } from 'src/app/models/producto';
 import { ProductoDto } from 'src/app/models/productoDto';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,11 +14,12 @@ import { ProductoService } from 'src/app/services/producto.service';
   selector: 'app-form-producto',
   templateUrl: './form-producto.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule]
 })
 export class FormProductoComponent implements OnInit {
 
   public producto: ProductoDto = new ProductoDto();
+  public productoCargar: Producto;
   public usuario: Usuario;
   public categorias: Categoria[];
   public presentacionProducto: PresentacionProducto[];
@@ -38,14 +40,24 @@ export class FormProductoComponent implements OnInit {
   constructor(private productoService: ProductoService,
     private router: Router,
     public authService: AuthService,
-    private formBuilder: FormBuilder){}
+    private formBuilder: FormBuilder,
+    private activatetedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.productoService.getCategorias().subscribe(categorias =>{
+    this.activatetedRoute.paramMap.subscribe(params => {
+      let id = +params.get('id');
+      if (id != 0) {
+        this.productoService.getProducto(id).subscribe(response => {
+          this.producto = response.producto;
+        })
+      }
+    })
+
+    this.productoService.getCategorias().subscribe(categorias => {
       this.categorias = categorias as Categoria[];
     });
-    
-    this.productoService.getPresentacionProductos().subscribe(presentacion =>{
+
+    this.productoService.getPresentacionProductos().subscribe(presentacion => {
       this.presentacionProducto = presentacion as PresentacionProducto[];
     });
 
@@ -88,5 +100,28 @@ export class FormProductoComponent implements OnInit {
         this.errores = err.error.errors as string[]
       }
     });
+  }
+
+  public editarProducto(): void {
+    this.producto.usuario = this.authService.usuario.idUsuario;
+    console.log(this.producto);
+    this.productoService.updateProducto(this.producto).subscribe(response =>{
+      console.log(response.producto, ' Dentro del subcribe');
+      this.router.navigate(['/productos/detalle-producto', response.producto.idProducto]);
+    })
+  }
+
+  public compararCategoria(o1: Categoria, o2: Categoria): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+    return (o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idCategoria === o2.idCategoria);
+  }
+
+  public compararPresentacion(o1: PresentacionProducto, o2: PresentacionProducto): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined? false: o1.idPresentacion === o2.idPresentacion;
   }
 }

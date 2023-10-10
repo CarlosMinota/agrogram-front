@@ -34,7 +34,7 @@ export class DetalleProductoComponent {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params =>{
       let idProducto = +params.get('id');
-      this.productoService.getProducto(idProducto).subscribe(response =>{
+      this.productoService.getProductoEntidad(idProducto).subscribe(response =>{
         this.producto = response.producto as Producto;
       })
     })

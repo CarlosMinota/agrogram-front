@@ -14,8 +14,4 @@ export class Usuario {
     ciudad: Ciudad;
     productos: Array<Producto> = [];
     roles: string[] = [];
-
-    constructor(){
-        
-    }
 }

@@ -50,7 +50,9 @@ export class PerfilComponent {
     private usuarioService: UsuarioService,
     private fb: UntypedFormBuilder,
     private modalService: NgbModal,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder) { 
+      this.usuario = new Usuario()
+    }
 
   ngOnInit(): void {
     this.usuarioService.getDepartamentos().subscribe(response => {
@@ -64,7 +66,6 @@ export class PerfilComponent {
       // console.log(this.usuario);
     });
     this.usuario = this.prueba();
-    console.log(this.usuario , 'Dentro del onInit')
 
     this.form = this.formBuilder.group({
       nombreUsuario: ['', Validators.required],

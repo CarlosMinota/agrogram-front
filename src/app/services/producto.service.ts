@@ -46,8 +46,19 @@ export class ProductoService {
     );
   }
 
-  updateProducto(producto: Producto): Observable<Producto> {
-    return this.httpClient.put<Producto>(`${this.url}/${producto.idProducto}`, producto).pipe(
+  getProductoEntidad(id: number): Observable<any> {
+    return this.httpClient.get(`${this.url}-entidad/${id}`).pipe(
+      catchError(err => {
+        if (err.status != 401 && err.error.mensaje) {
+          console.error(err.error.mensaje)
+        }
+        return throwError(() => err)
+      })
+    );
+  }
+
+  updateProducto(producto: ProductoDto): Observable<any> {
+    return this.httpClient.put<any>(`${this.url}/${producto.idProducto}`, producto).pipe(
       catchError(err => {
         if (err.status == 400) {
           return throwError(() => err)

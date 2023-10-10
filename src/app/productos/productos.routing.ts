@@ -38,6 +38,17 @@ export const ProductosRoutes: Routes = [
                         {title:'Registrar un nuevo producto'}
                     ]
                 }
+            },
+            {
+                path: 'form-producto/:id',
+                component: FormProductoComponent,
+                data: {
+                    title: 'Editar producto',
+                    urls: [
+                        {title: 'Productos', url: '/productos'},
+                        {title:'Editar producto'}
+                    ]
+                }
             }
         ]
     }
