@@ -3,6 +3,7 @@ import { environment } from '../environments/environment';
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Usuario } from '../models/usuario';
+import { UsuarioDto } from '../models/usuarioDto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UsuarioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getClientes(): Observable<any> {
+  getUsuarios(): Observable<any> {
     return this.httpClient.get(`${this.url}`);
   }
 
@@ -45,7 +46,18 @@ export class UsuarioService {
     );
   }
 
-  updateUsuario(usuario: Usuario): Observable<any> {
+  getUsuarioEntidad(idUsuario: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.url}-entidad/${idUsuario}`).pipe(
+      catchError(err => {
+        if (err.status != 401 && err.error.mensaje) {
+          console.error(err.error.mensaje)
+        }
+        return throwError(() => err)
+      })
+    );
+  }
+
+  updateUsuario(usuario: UsuarioDto): Observable<any> {
     return this.httpClient.put<any>(`${this.url}/${usuario.idUsuario}`, usuario).pipe(
       catchError(err => {
         if (err.status == 400) {
@@ -88,7 +100,7 @@ export class UsuarioService {
   subirFoto(archivo: File, idUsuario): Observable<HttpEvent<{}>> {
     let formData = new FormData();
     formData.append('archivo', archivo);
-    formData.append('idUsuario', idUsuario);
+    formData.append('id', idUsuario);
 
     const req = new HttpRequest('POST', `${this.url}/upload`, formData, {
       reportProgress: true

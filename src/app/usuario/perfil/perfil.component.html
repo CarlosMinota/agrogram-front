@@ -1,3 +1,21 @@
+<ng-template #modalBasic let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Cargar imagen</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="card-body">
+            <form>
+                <input (change)="seleccionarFoto($event)" class="form-control" type="file" id="formFile"  aria-label="Upload">
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="subirFoto()" [disabled]="!fotoSeleccionada">
+            Subir
+        </button>
+    </div>
+</ng-template>
 <div class="row" *ngIf="usuario">
     <!-- Column -->
     <div class="col-lg-4 col-xlg-3 col-md-5">
@@ -30,12 +48,20 @@
                         Enviar mensaje
                     </button>
                     <button *ngIf="usuario.idUsuario == authService.usuario.idUsuario" type="button"
+                        class="btn btn-rounded btn-outline-warning" (click)="modalOpen(modalBasic)">
+                        Subir foto
+                    </button>
+                    <button *ngIf="usuario.idUsuario == authService.usuario.idUsuario" type="button"
                         class="btn btn-rounded btn-outline-success" (click)="modalOpenRegiser(modalRegiser)">
                         Editar perfil
                     </button>
                     <button *ngIf="usuario.idUsuario == authService.usuario.idUsuario" type="button"
                         class="btn btn-rounded btn-outline-success" [routerLink]="['/productos/form-producto']">
                         Registar un producto
+                    </button>
+                    <button *ngIf="usuario.idUsuario == authService.usuario.idUsuario" type="button"
+                        class="btn btn-rounded btn-outline-danger" (click)="eliminarUsuario(usuario)">
+                        Eliminar perfil
                     </button>
                 </div>
             </div>
@@ -90,7 +116,7 @@
                 <label for="name" class="col-sm-4 col-form-label">Nombre completo</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" formControlName="nombreUsuario" id="name"
-                        [(ngModel)]="usuario.nombreUsuario"
+                        [(ngModel)]="usuarioForm.nombreUsuario"
                         [ngClass]="{ 'is-invalid': submitted && f['nombreUsuario'].errors }" />
                     <div *ngIf="submitted && f['nombreUsuario'].errors" class="invalid-feedback">
                         <div *ngIf="f['nombreUsuario'].errors['required']">{{mensaje}}</div>
@@ -102,7 +128,7 @@
                 <label for="position" class="col-sm-4 col-form-label">Nombre de usuario</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" formControlName="username" id="position"
-                        [(ngModel)]="usuario.username"
+                        [(ngModel)]="usuarioForm.username"
                         [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
                     <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
                         <div *ngIf="f['username'].errors['required']">
@@ -122,7 +148,7 @@
                 <label for="email" class="col-sm-4 col-form-label">Telefono</label>
                 <div class="col-sm-8">
                     <input type="email" class="form-control" formControlName="telefono" id="email"
-                        [(ngModel)]="usuario.telefono"
+                        [(ngModel)]="usuarioForm.telefono"
                         [ngClass]="{ 'is-invalid': submitted && f['telefono'].errors }" />
                     <div *ngIf="submitted && f['telefono'].errors" class="invalid-feedback">
                         <div *ngIf="f['telefono'].errors['required']">{{mensaje}}</div>
@@ -134,7 +160,7 @@
                 <label for="mobile" class="col-sm-4 col-form-label">Correo electronico</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" formControlName="email" id="mobile"
-                        [(ngModel)]="usuario.email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+                        [(ngModel)]="usuarioForm.email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
                     <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                         <div *ngIf="f['email'].errors['required']">{{mensaje}}</div>
                     </div>
@@ -145,7 +171,7 @@
                 <label for="salary" class="col-sm-4 col-form-label">Cedula</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" formControlName="cedula" id="salary"
-                        [(ngModel)]="usuario.cedula" [ngClass]="{ 'is-invalid': submitted && f['cedula'].errors }" />
+                        [(ngModel)]="usuarioForm.cedula" [ngClass]="{ 'is-invalid': submitted && f['cedula'].errors }" />
                     <div *ngIf="submitted && f['cedula'].errors" class="invalid-feedback">
                         <div *ngIf="f['cedula'].errors['required']">
                             {{mensaje}}
@@ -157,19 +183,13 @@
             <div class="mb-3 row">
                 <label for="projects" class="col-sm-4 col-form-label">Departamento</label>
                 <div class="col-sm-8">
-                    <select class="form-select mr-sm-2" id="inlineFormCustomSelect"
-                        [ngClass]="{ 'is-invalid': submitted && f['departamento'].errors }" name="departamento"
+                    <select class="form-select mr-sm-2" id="inlineFormCustomSelect" name="departamento"
                         (change)="selectedOrgMod($event)">
                         <option [value]="undefined">Seleccionar departamento</option>
                         <option *ngFor="let departamento of departamentos" [value]="departamento.idDepartamento">
                             {{departamento.nombreDepartamento}}
                         </option>
                     </select>
-                    <div *ngIf="submitted && f['departamento'].errors" class="invalid-feedback">
-                        <div *ngIf="f['departamento'].errors['required']">
-                            {{mensaje}}
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -177,8 +197,8 @@
                 <label for="projects" class="col-sm-4 col-form-label">Ciudad</label>
                 <div class="col-sm-8">
                     <select class="form-select mr-sm-2" id="inlineFormCustomSelectd" formControlName="ciudad"
-                        [ngClass]="{ 'is-invalid': submitted && f['ciudad'].errors }" [(ngModel)]="usuario.ciudad"
-                        name="ciudad">
+                        [ngClass]="{ 'is-invalid': submitted && f['ciudad'].errors }" [(ngModel)]="usuarioForm.ciudad"
+                        name="ciudad" [compareWith]="compararCiudad">
                         <option [ngValue]="undefined">Seleccionar la ciudad</option>
                         <option *ngFor="let ciudad of ciudades" [ngValue]="ciudad.idCiudad">
                             {{ciudad.nombreCiudad}}</option>
@@ -195,7 +215,7 @@
                 <label for="salary" class="col-sm-4 col-form-label">Contraseña</label>
                 <div class="col-sm-8">
                     <input type="password" class="form-control" formControlName="contrasena" id="contrasena"
-                        [(ngModel)]="usuario.contrasena"
+                        [(ngModel)]="usuarioForm.contrasena"
                         [ngClass]="{ 'is-invalid': submitted && f['contrasena'].errors }" />
                     <div *ngIf="submitted && f['contrasena'].errors" class="invalid-feedback">
                         <div *ngIf="f['contrasena'].errors['required']">
@@ -223,3 +243,4 @@
         </form>
     </div>
 </ng-template>
+<notifier-container></notifier-container>

@@ -21,7 +21,7 @@ export class UsuarioComponent {
   constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
-    this.usuarioService.getClientes().subscribe(response => {
+    this.usuarioService.getUsuarios().subscribe(response => {
       this.usuarios = response as Usuario[];
     })
   }
