@@ -36,38 +36,30 @@
         <!-- ============================================================== -->
         <!-- Logo -->
         <!-- ============================================================== -->
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" [routerLink]="['/']">
           <!-- Logo icon -->
           <b class="logo-icon">
             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
             <!-- Dark Logo icon -->
             <img
-              src="assets/images/logo-icon.png"
+              src="assets/images/faviconagrogram2redondo.png"
               alt="homepage"
               class="dark-logo"
             />
             <!-- Light Logo icon -->
             <img
-              src="assets/images/logo-light-icon.png"
+              src="assets/images/faviconagrogram2redondo.png"
               alt="homepage"
               class="light-logo"
             />
           </b>
           <!--End Logo icon -->
           <!-- Logo text -->
-          <span class="logo-text">
+          <span class="logo-text text-center">
             <!-- dark Logo text -->
-            <img
-              src="assets/images/logo-text.png"
-              alt="homepage"
-              class="dark-logo"
-            />
+            <h2 class="dark-logo p-3" style="font-family: Impact; color: rgb(14, 124, 88); font-size: xx-large;">Agrogram</h2>
             <!-- Light Logo text -->
-            <img
-              src="assets/images/logo-light-text.png"
-              class="light-logo"
-              alt="homepage"
-            />
+            <h2 class="light-logo" style="font-family: Impact; color: rgb(14, 124, 88); font-size: xx-large;">Agrogram</h2>
           </span>
         </a>
         <!-- ============================================================== -->
@@ -134,11 +126,11 @@
     <!-- Horizontal Header -->
     <ng-template #vlayout>
       <ng-scrollbar class="scroll-sidebar">
-        <app-vertical-sidebar
+        <app-sidebar-vertical
           [showClass]="showMobileMenu"
           (notify)="handleClick($event)"
         >
-        </app-vertical-sidebar>
+        </app-sidebar-vertical>
       </ng-scrollbar>
     </ng-template>
     <!-- End Sidebar scroll-->
@@ -200,7 +192,7 @@
           </a>
           <ng-template ngbNavContent>
             <div class="p-3 border-bottom">
-              <h5 class="font-medium mb-4 mt-2">Layout Settings</h5>
+              <h5 class="font-medium mb-4 mt-2">Personalizar página</h5>
               <div class="form-check mt-2">
                 <input
                   type="checkbox"
@@ -233,77 +225,15 @@
                   "
                 />
                 <label class="form-check-label" for="theme-view"
-                  >Dark Theme</label
+                  >Tema oscuro</label
                 >
-              </div>
-              <div class="form-check mt-2">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  name="sidebar-position"
-                  id="sidebar-position"
-                  [attr.checked]="
-                    options.sidebarpos == 'fixed' ? 'checked' : null
-                  "
-                  (change)="
-                    options.sidebarpos =
-                      options.sidebarpos == 'fixed' ? 'absolute' : 'fixed'
-                  "
-                />
-                <label class="form-check-label" for="sidebar-position"
-                  >Fixed Sidebar</label
-                >
-              </div>
-              <div class="form-check mt-2">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  name="header-position"
-                  id="header-position"
-                  [attr.checked]="
-                    options.headerpos == 'fixed' ? 'checked' : null
-                  "
-                  (change)="
-                    options.headerpos =
-                      options.headerpos == 'fixed' ? 'absolute' : 'fixed'
-                  "
-                />
-                <label class="form-check-label" for="header-position"
-                  >Fixed Header</label
-                >
-              </div>
-              <div class="form-check mt-2">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  name="boxed-layout"
-                  id="boxed-layout"
-                  [attr.checked]="options.boxed == 'boxed' ? 'checked' : null"
-                  (change)="
-                    options.boxed = options.boxed == 'full' ? 'boxed' : 'full'
-                  "
-                />
-                <label class="form-check-label" for="boxed-layout"
-                  >Boxed Layout</label
-                >
-              </div>
-              <div class="form-check mt-2">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  name="rtl-layout"
-                  id="rtl-layout"
-                  [attr.checked]="options.dir == 'rtl' ? 'checked' : null"
-                  (change)="options.dir = options.dir == 'rtl' ? 'ltr' : 'rtl'"
-                />
-                <label class="form-check-label" for="rtl-layout">RTL</label>
               </div>
             </div>
             <div
               class="p-3 border-bottom"
               *ngIf="options.layout === 'vertical'"
             >
-              <h5 class="font-medium mb-4 mt-2">Sidebar Types</h5>
+              <h5 class="font-medium mb-4 mt-2">Estilos de barra lateral</h5>
               <div class="form-check mt-2">
                 <input
                   type="radio"
@@ -315,7 +245,7 @@
                   (change)="options.sidebartype = 'mini-sidebar'"
                 />
                 <label class="form-check-label" for="minisidebar"
-                  >Mini Sidebar</label
+                  >Mini</label
                 >
               </div>
               <div class="form-check mt-2">
@@ -329,7 +259,7 @@
                   (change)="options.sidebartype = 'iconbar'"
                 />
                 <label class="form-check-label" for="iconsidebar"
-                  >Icon Sidebar</label
+                  >Solo íconos</label
                 >
               </div>
               <div class="form-check mt-2">
@@ -343,7 +273,7 @@
                   (change)="options.sidebartype = 'overlay'"
                 />
                 <label class="form-check-label" for="overlaysidebar"
-                  >Overlay Sidebar</label
+                  >Ocultar</label
                 >
               </div>
               <div class="form-check mt-2">
@@ -357,7 +287,7 @@
                   (change)="options.sidebartype = 'full'"
                 />
                 <label class="form-check-label" for="fullsidebar"
-                  >Full Sidebar</label
+                  >Completa</label
                 >
               </div>
             </div>
@@ -365,7 +295,7 @@
               class="p-3 border-bottom"
               *ngIf="options.layout === 'vertical'"
             >
-              <h5 class="font-medium mb-4 mt-2">Logo Backgrounds</h5>
+              <h5 class="font-medium mb-4 mt-2">Personalizar logo</h5>
               <ul class="theme-color">
                 <li class="theme-item">
                   <a
@@ -418,7 +348,7 @@
               </ul>
             </div>
             <div class="p-3 border-bottom">
-              <h5 class="font-medium mb-4 mt-2">Navbar Backgrounds</h5>
+              <h5 class="font-medium mb-4 mt-2">Personalizar cabecera</h5>
               <ul class="theme-color">
                 <li class="theme-item">
                   <a
@@ -471,7 +401,7 @@
               </ul>
             </div>
             <div class="p-3 border-bottom">
-              <h5 class="font-medium mb-4 mt-2">Sidebar Backgrounds</h5>
+              <h5 class="font-medium mb-4 mt-2">Personalizar barra lateral</h5>
               <ul class="theme-color">
                 <li class="theme-item">
                   <a
@@ -522,521 +452,6 @@
                   ></a>
                 </li>
               </ul>
-            </div>
-          </ng-template>
-        </li>
-
-        <li [ngbNavItem]="2">
-          <a ngbNavLink><i class="mdi mdi-message-reply fs-6"></i></a>
-          <ng-template ngbNavContent>
-            <ul class="mailbox list-style-none mt-3">
-              <li>
-                <ng-scrollbar class="message-center chat-scroll">
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_1"
-                    data-user-id="1"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user1.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block online float-end"
-                        data-status="online"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Chris Evans</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >Just see the my admin!</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:30 AM</span
-                      >
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_2"
-                    data-user-id="2"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user2.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block busy float-end"
-                        data-status="busy"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Ray Hudson</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >I've sung a song! See you at</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:10 AM</span
-                      >
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_3"
-                    data-user-id="3"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user3.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block away float-end"
-                        data-status="away"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Lb James</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >I am a singer!</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:08 AM</span
-                      >
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_4"
-                    data-user-id="4"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user4.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block offline float-end"
-                        data-status="offline"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Don Andres</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >Just see the my admin!</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:02 AM</span
-                      >
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_5"
-                    data-user-id="5"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user1.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block online float-end"
-                        data-status="online"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Chris Evans</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >Just see the my admin!</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:30 AM</span
-                      >
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_6"
-                    data-user-id="6"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user2.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block busy float-end"
-                        data-status="busy"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Ray Hudson</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >I've sung a song! See you at</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:10 AM</span
-                      >
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_7"
-                    data-user-id="7"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user3.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block away float-end"
-                        data-status="away"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Lb James</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >I am a singer!</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:08 AM</span
-                      >
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_8"
-                    data-user-id="8"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user4.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block offline float-end"
-                        data-status="offline"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Don Andres</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >Just see the my admin!</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:02 AM</span
-                      >
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_9"
-                    data-user-id="9"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user1.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block online float-end"
-                        data-status="online"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Chris Evans</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >Just see the my admin!</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:30 AM</span
-                      >
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_10"
-                    data-user-id="10"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user2.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block busy float-end"
-                        data-status="busy"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Ray Hudson</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >I've sung a song! See you at</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:10 AM</span
-                      >
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_11"
-                    data-user-id="11"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user3.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block away float-end"
-                        data-status="away"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Lb James</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >I am a singer!</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:08 AM</span
-                      >
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="message-item border-bottom d-block text-decoration-none"
-                    id="chat_user_12"
-                    data-user-id="12"
-                  >
-                    <span class="user-img position-relative d-inline-block">
-                      <img
-                        src="assets/images/users/user4.jpg"
-                        alt="user"
-                        class="rounded-circle"
-                      />
-                      <span
-                        class="profile-status rounded-circle d-inline-block offline float-end"
-                        data-status="offline"
-                      ></span>
-                    </span>
-                    <span
-                      class="mail-contnet d-inline-block w-75 ps-3 align-middle"
-                    >
-                      <h5 class="mb-0">Don Andres</h5>
-                      <span
-                        class="mail-desc fs-2 d-block text-muted text-truncate"
-                        >Just see the my admin!</span
-                      >
-                      <span class="time fs-2 d-block text-muted text-truncate"
-                        >9:02 AM</span
-                      >
-                    </span>
-                  </a>
-                </ng-scrollbar>
-              </li>
-            </ul>
-          </ng-template>
-        </li>
-        <li [ngbNavItem]="3">
-          <a ngbNavLink><i class="mdi mdi-star-circle fs-6"></i></a>
-          <ng-template ngbNavContent>
-            <div class="p-3">
-              <h6 class="mt-3 mb-4">Activity Timeline</h6>
-              <div class="steamline position-relative border-start ms-4">
-                <div class="sl-item my-3 py-1 border-bottom">
-                  <div
-                    class="sl-left float-start text-center rounded-circle text-white me-3 bg-success"
-                  >
-                    <i class="ti-user"></i>
-                  </div>
-                  <div class="sl-right ps-4">
-                    <div class="font-medium fs-3">
-                      Meeting today
-                      <span class="sl-date fs-1 text-muted"> 5pm</span>
-                    </div>
-                    <div class="desc fs-3">you can write anything</div>
-                  </div>
-                </div>
-                <div class="sl-item my-3 py-1 border-bottom">
-                  <div
-                    class="sl-left float-start text-center rounded-circle text-white me-3 bg-info"
-                  >
-                    <i class="fas fa-image"></i>
-                  </div>
-                  <div class="sl-right ps-4">
-                    <div class="font-medium fs-3">Send documents to Clark</div>
-                    <div class="desc fs-3">Lorem Ipsum is simply</div>
-                  </div>
-                </div>
-                <div class="sl-item my-3 py-1 border-bottom">
-                  <div
-                    class="sl-left float-start text-center rounded-circle text-white me-3"
-                  >
-                    <img
-                      class="rounded-circle"
-                      alt="user"
-                      src="assets/images/users/user2.jpg"
-                    />
-                  </div>
-                  <div class="sl-right ps-4">
-                    <div class="font-medium fs-3">
-                      Go to the Doctor
-                      <span class="sl-date fs-1 text-muted">5 minutes ago</span>
-                    </div>
-                    <div class="desc fs-3">Contrary to popular belief</div>
-                  </div>
-                </div>
-                <div class="sl-item my-3 py-1 border-bottom">
-                  <div
-                    class="sl-left float-start text-center rounded-circle text-white me-3"
-                  >
-                    <img
-                      class="rounded-circle"
-                      alt="user"
-                      src="assets/images/users/user1.jpg"
-                    />
-                  </div>
-                  <div class="sl-right ps-4">
-                    <div>
-                      <a href="javascript:void(0)" class="fs-3">Stephen</a>
-                      <span class="sl-date fs-1 text-muted">5 minutes ago</span>
-                    </div>
-                    <div class="desc fs-3">Approve meeting with tiger</div>
-                  </div>
-                </div>
-                <div class="sl-item my-3 py-1 border-bottom">
-                  <div
-                    class="sl-left float-start text-center rounded-circle text-white me-3 bg-primary"
-                  >
-                    <i class="ti-user"></i>
-                  </div>
-                  <div class="sl-right ps-4">
-                    <div class="font-medium fs-3">
-                      Meeting today
-                      <span class="sl-date fs-1 text-muted"> 5pm</span>
-                    </div>
-                    <div class="desc fs-3">you can write anything</div>
-                  </div>
-                </div>
-                <div class="sl-item my-3 py-1 border-bottom">
-                  <div
-                    class="sl-left float-start text-center rounded-circle text-white me-3 bg-info"
-                  >
-                    <i class="fas fa-image"></i>
-                  </div>
-                  <div class="sl-right ps-4">
-                    <div class="font-medium fs-3">Send documents to Clark</div>
-                    <div class="desc fs-3">Lorem Ipsum is simply</div>
-                  </div>
-                </div>
-                <div class="sl-item my-3 py-1 border-bottom">
-                  <div
-                    class="sl-left float-start text-center rounded-circle text-white me-3"
-                  >
-                    <img
-                      class="rounded-circle"
-                      alt="user"
-                      src="assets/images/users/user4.jpg"
-                    />
-                  </div>
-                  <div class="sl-right ps-4">
-                    <div class="font-medium fs-3">
-                      Go to the Doctor
-                      <span class="sl-date fs-1 text-muted">5 minutes ago</span>
-                    </div>
-                    <div class="desc fs-3">Contrary to popular belief</div>
-                  </div>
-                </div>
-                <div class="sl-item my-3 py-1">
-                  <div
-                    class="sl-left float-start text-center rounded-circle text-white me-3"
-                  >
-                    <img
-                      class="rounded-circle"
-                      alt="user"
-                      src="assets/images/users/user1.jpg"
-                    />
-                  </div>
-                  <div class="sl-right ps-4">
-                    <div>
-                      <a href="javascript:void(0)" class="fs-3">Stephen</a>
-                      <span class="sl-date fs-1 text-muted">5 minutes ago</span>
-                    </div>
-                    <div class="desc fs-3">Approve meeting with tiger</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </ng-template>
         </li>

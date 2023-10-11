@@ -27,7 +27,6 @@ declare var $: any;
     BreadcrumbComponent,
     HorizontalNavigationComponent,
     HeaderHorizontalComponent,
-    HorizontalSidebarComponent,
     SidebarHorizontalComponent,
     NgScrollbarModule,
     NgbNavModule,

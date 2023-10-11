@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FeatherModule } from 'angular-feather';
 import { RouteInfo } from './sidebar-horizontal';
-import { HorizontalSidebarService } from '../horizontal-sidebar/horizontal-sidebar.service';
+import { SidebarHorizontalService } from './sidebar-horizontal.service';
 
 @Component({
   selector: 'app-sidebar-horizontal',
@@ -19,7 +19,7 @@ export class SidebarHorizontalComponent {
   path = '';
 
   constructor(
-    private menuServise: HorizontalSidebarService,
+    private menuServise: SidebarHorizontalService,
     private router: Router
   ) {
     this.menuServise.items.subscribe((menuItems) => {

@@ -135,7 +135,7 @@ export class PerfilComponent {
       return;
     }
     this.usuarioService.updateUsuario(this.usuarioForm).subscribe(response =>{
-      this.router.navigate(['/usuarios/detalle-perfil', this.usuario.idUsuario]);
+      this.showNotification('success', response.mensaje)
     })
   }
 
@@ -189,9 +189,10 @@ export class PerfilComponent {
     } else {
       this.usuarioService.subirFoto(this.fotoSeleccionada, this.usuario.idUsuario).subscribe(event => {
         this.authService.usuario.imagen = this.fotoSeleccionada.name;
-        console.log(this.authService.usuario.imagen)
+        console.log(this.authService.usuario)
         this.showNotification('success', 'La imagen se ha subido correctamente');
       });
+      this.ngOnInit();
     }
   }
 
