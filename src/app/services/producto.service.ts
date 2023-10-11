@@ -90,7 +90,7 @@ export class ProductoService {
     formData.append('archivo', archivo);
     formData.append('id', id);
 
-    const req = new HttpRequest('POST', `${this.url}/upload`, formData);
+    const req = new HttpRequest('POST', `${this.url}/uploads`, formData);
 
     return this.httpClient.request(req);
   }

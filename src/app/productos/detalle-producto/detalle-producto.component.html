@@ -1,3 +1,21 @@
+<ng-template #modalBasic let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Cargar imagen</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="card-body">
+            <form>
+                <input (change)="seleccionarFoto($event)" class="form-control" type="file" id="formFile"  aria-label="Upload">
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="subirFoto()" [disabled]="!fotoSeleccionada">
+            Subir
+        </button>
+    </div>
+</ng-template>
 <div class="row" *ngIf="producto">
     <!-- Column -->
     <div class="col-lg-12">
@@ -27,10 +45,19 @@
                         <h3 class="p-2-title mt-1 pt-3">Informacion sobre Producción</h3>
                         <p class="mb-1">{{producto.infoProduccion}}</p>
                         <h3 class="mt-1 pt-3 mb-4">Precio libra - COP$ {{producto.precio | number :'1.2-2'}}</h3>
-                        <div class="buton-group">
-                            <button *ngIf="producto.usuario.idUsuario == authService.usuario.idUsuario" type="button"
-                                class="btn btn-rounded btn-outline-success" [routerLink]="['/productos/form-producto', producto.idProducto]">
+                        <div class="buton-group row"
+                            *ngIf="producto.usuario.idUsuario == authService.usuario.idUsuario">
+                            <button type="button" class="btn btn-rounded btn-outline-success col-md-3"
+                                [routerLink]="['/productos/form-producto', producto.idProducto]">
                                 Editar
+                            </button>
+                            <button type="button" class="btn btn-rounded btn-outline-warning col-md-3"
+                                (click)="modalOpen(modalBasic)">
+                                Subir imagen
+                            </button>
+                            <button type="button" class="btn btn-rounded btn-outline-danger col-md-3"
+                                (click)="eliminarProducto(producto)">
+                                Eliminar producto
                             </button>
                         </div>
                     </div>
@@ -64,3 +91,4 @@
     </div>
     <!-- Column -->
 </div>
+<notifier-container></notifier-container>
