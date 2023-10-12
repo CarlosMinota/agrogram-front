@@ -4,6 +4,8 @@ import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Usuario } from '../models/usuario';
 import { UsuarioDto } from '../models/usuarioDto';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class UsuarioService {
 
   private url: string = environment.urlEndPoint+'usuario';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   getUsuarios(): Observable<any> {
     return this.httpClient.get(`${this.url}`);

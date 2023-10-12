@@ -4,6 +4,8 @@ import { environment } from '../environments/environment';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Producto } from '../models/producto';
 import { ProductoDto } from '../models/productoDto';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class ProductoService {
 
   private url = environment.urlEndPoint+'producto'
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   getProductos(): Observable<any> {
     return this.httpClient.get(`${this.url}`);
