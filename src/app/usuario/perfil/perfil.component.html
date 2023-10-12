@@ -44,7 +44,7 @@
                 <h6 class="mb-3">{{usuario.ciudad?.nombreCiudad}}</h6>
                 <div class="button-group">
                     <button *ngIf="usuario.idUsuario != authService.usuario.idUsuario" type="button"
-                        class="btn btn-rounded btn-outline-success">
+                        class="btn btn-rounded btn-outline-success" (click)="chat()">
                         Enviar mensaje
                     </button>
                     <button *ngIf="usuario.idUsuario == authService.usuario.idUsuario" type="button"

@@ -94,8 +94,8 @@ export class RegisterComponent {
   public createUsuario(): void {
     this.usuarioService.crearUsuario(this.usuario).subscribe({
       next: (usuario) => {
-        this.router.navigate(['/home']);
         this.showNotification('success', 'El registro ha sido exitoso')
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         this.errores = err.error.errors as string[]
@@ -137,7 +137,6 @@ export class RegisterComponent {
 
   onSubmit(): void {
     this.submitted = true;
-    console.log(JSON.stringify(this.form.value, null, 2));
     if (this.form.invalid) {
       return;
     }

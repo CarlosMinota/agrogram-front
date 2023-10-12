@@ -103,7 +103,6 @@ export class PerfilComponent {
 
   onSubmit(): void {
     this.submitted = true;
-    console.log(JSON.stringify(this.form.value, null, 2));
     if (this.form.invalid) {
       return;
     }
@@ -116,6 +115,10 @@ export class PerfilComponent {
 
   modalOpenRegiser(modalRegiser: any) {
     this.modalService.open(modalRegiser);
+  }
+
+  public chat(): void {
+    this.showNotification('warning', 'Esta funcionalidad está en desarrollo');
   }
 
   public listarCiudadesDepartamento(idDepartamento: number): void {
@@ -189,7 +192,6 @@ export class PerfilComponent {
     } else {
       this.usuarioService.subirFoto(this.fotoSeleccionada, this.usuario.idUsuario).subscribe(event => {
         this.authService.usuario.imagen = this.fotoSeleccionada.name;
-        console.log(this.authService.usuario)
         this.showNotification('success', 'La imagen se ha subido correctamente');
       });
       this.ngOnInit();

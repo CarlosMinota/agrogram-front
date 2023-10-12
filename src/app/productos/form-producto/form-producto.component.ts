@@ -104,9 +104,7 @@ export class FormProductoComponent implements OnInit {
 
   public editarProducto(): void {
     this.producto.usuario = this.authService.usuario.idUsuario;
-    console.log(this.producto);
     this.productoService.updateProducto(this.producto).subscribe(response =>{
-      console.log(response.producto, ' Dentro del subcribe');
       this.router.navigate(['/productos/detalle-producto', response.producto.idProducto]);
     })
   }

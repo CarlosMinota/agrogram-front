@@ -92,7 +92,6 @@ export class DetalleProductoComponent {
 
   public seleccionarFoto(event: any) {
     this.fotoSeleccionada = event.target.files[0];
-    console.log(this.fotoSeleccionada);
     if (this.fotoSeleccionada.type.indexOf('image') < 0) {
       this.fotoSeleccionada = null;
     }
