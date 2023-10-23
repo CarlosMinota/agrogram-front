@@ -70,19 +70,6 @@
                             </div>
                             <div class="mb-3 row">
                                 <div class="col-12 ">
-                                    <input class="form-control" type="text" formControlName="cedula"
-                                        [(ngModel)]="usuario.cedula"
-                                        [ngClass]="{ 'is-invalid': submitted && f['cedula'].errors }" name="cedula"
-                                        placeholder="Cedula">
-                                    <div *ngIf="submitted && f['cedula'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['cedula'].errors['required']">
-                                            {{mensaje}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <div class="col-12 ">
                                     <div class="form-group">
                                         <select class="form-select mr-sm-2" id="inlineFormCustomSelect"
                                             [ngClass]="{ 'is-invalid': submitted && f['departamento'].errors }"

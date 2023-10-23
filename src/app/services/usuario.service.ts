@@ -91,10 +91,6 @@ export class UsuarioService {
     return this.httpClient.get<any>(`${this.url}/username/${username}`);
   }
 
-  exitsByCedula(cedula: string): Observable<any> {
-    return this.httpClient.get<any>(`${this.url}/cedula/${cedula}`);
-  }
-
   exitsByEmail(email: string): Observable<any> {
     return this.httpClient.get<any>(`${this.url}/email/${email}`);
   }

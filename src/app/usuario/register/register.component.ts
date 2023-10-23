@@ -34,7 +34,6 @@ export class RegisterComponent {
     username: new FormControl(''),
     telefono: new FormControl(''),
     email: new FormControl(''),
-    cedula: new FormControl(''),
     departamento: new FormControl(''),
     ciudad: new FormControl(''),
     contrasena: new FormControl(''),
@@ -62,7 +61,6 @@ export class RegisterComponent {
       ],
       telefono: ['', Validators.required],
       email: ['', Validators.required],
-      cedula: ['', Validators.required],
       departamento: ['', Validators.required],
       ciudad: ['', Validators.required],
       contrasena: ['', [
@@ -86,7 +84,6 @@ export class RegisterComponent {
 
   public validacionesUsuario(): void {
     this.exitsByUsername();
-    this.exitsByCedula();
     this.exitsByEmail();
     this.createUsuario();
   }
@@ -105,14 +102,6 @@ export class RegisterComponent {
 
   public exitsByUsername(): void {
     this.usuarioService.exitsByUsername(this.usuario.username).subscribe(response => {
-      if (response.mensaje) {
-        this.showNotification('error', response.mensaje);
-      }
-    });
-  }
-
-  public exitsByCedula(): void {
-    this.usuarioService.exitsByCedula(this.usuario.cedula).subscribe(response => {
       if (response.mensaje) {
         this.showNotification('error', response.mensaje);
       }

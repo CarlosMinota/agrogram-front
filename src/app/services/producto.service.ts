@@ -87,6 +87,10 @@ export class ProductoService {
     );
   }
 
+  filtrarProductos(nombreProducto: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.url}/filtrar-productos/${nombreProducto}`)
+  }
+
   subirFoto(archivo: File, id): Observable<HttpEvent<{}>> {
     let formData = new FormData();
     formData.append('archivo', archivo);

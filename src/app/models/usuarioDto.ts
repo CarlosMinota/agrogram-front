@@ -4,7 +4,6 @@ export class UsuarioDto {
     telefono: string;
     estadoUsuario: boolean;
     email: string;
-    cedula: string;
     contrasena: string;
     username: string;
     imagen: string;

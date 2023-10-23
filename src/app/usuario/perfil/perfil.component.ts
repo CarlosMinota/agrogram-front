@@ -45,7 +45,6 @@ export class PerfilComponent {
     username: new FormControl(''),
     telefono: new FormControl(''),
     email: new FormControl(''),
-    cedula: new FormControl(''),
     ciudad: new FormControl(''),
     contrasena: new FormControl(''),
   });
@@ -86,7 +85,6 @@ export class PerfilComponent {
       ],
       telefono: ['', Validators.required],
       email: ['', Validators.required],
-      cedula: ['', Validators.required],
       ciudad: ['', Validators.required],
       contrasena: ['', [
         Validators.required,
