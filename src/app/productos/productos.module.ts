@@ -6,6 +6,6 @@ import { ProductosRoutes } from './productos.routing';
 
 @NgModule({
   imports: [FormsModule, CommonModule, RouterModule.forChild(ProductosRoutes)],
-  declarations: []
+  declarations: [],
 })
 export class ProductosModule { }

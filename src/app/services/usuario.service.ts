@@ -12,12 +12,16 @@ import { Router } from '@angular/router';
 })
 export class UsuarioService {
 
-  private url: string = environment.urlEndPoint+'usuario';
+  private url: string = environment.urlEndPoint + 'usuario';
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   getUsuarios(): Observable<any> {
     return this.httpClient.get(`${this.url}`);
+  }
+
+  filtrarUsuarios(nombreUsuario: string): Observable<any> {
+    return this.httpClient.get(`${this.url}/filtrar-usuarios/${nombreUsuario}`);
   }
 
   crearUsuario(usuario: Usuario): Observable<Usuario> {
@@ -81,7 +85,7 @@ export class UsuarioService {
         if (err.status != 401 && err.error.mensaje) {
           console.error(err.error.mensaje)
         }
-        
+
         return throwError(() => err);
       })
     )
