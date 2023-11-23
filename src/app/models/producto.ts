@@ -12,6 +12,5 @@ export class Producto {
     descripcion: string;
     categoria: Categoria;
     usuario: Usuario;
-    presentacionProducto: PresentacionProducto;
     imagenes: Array<ImagenProducto> = [];
 }

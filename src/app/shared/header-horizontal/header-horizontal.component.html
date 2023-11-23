@@ -26,15 +26,15 @@
     <!-- ============================================================== -->
     <!-- Logo -->
     <!-- ============================================================== -->
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" [routerLink]="['/']">
       <!-- Logo icon -->
       <b class="logo-icon">
         <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
         <!-- Dark Logo icon -->
-        <img src="assets/images/nombrelogo.png" alt="homepage" class="dark-logo" />
+        <img src="assets/images/faviconagrogram2redondo.png" alt="homepage" class="dark-logo" />
         <!-- Light Logo icon -->
         <img
-          src="assets/images/nombrelogo.png"
+          src="assets/images/faviconagrogram2redondo.png"
           alt="homepage"
           class="light-logo"
         />
@@ -43,13 +43,9 @@
       <!-- Logo text -->
       <span class="logo-text">
         <!-- dark Logo text -->
-        <img src="assets/images/nombrelogo.png" alt="homepage" class="dark-logo" />
+        <h2 class="dark-logo p-3" style="font-family: Impact; color: rgb(14, 124, 88); font-size: xx-large;">Agrogram</h2>
         <!-- Light Logo text -->
-        <img
-          src="assets/images/nombrelogo.png"
-          class="light-logo"
-          alt="homepage"
-        />
+        <h2 class="light-logo" style="font-family: Impact; color: rgb(14, 124, 88); font-size: xx-large;">Agrogram</h2>
       </span>
     </a>
     <a
@@ -63,7 +59,14 @@
       <i class="ti-more"></i>
     </a>
   </div>
-  <ul class="navbar-nav float-end">
+  <div *ngIf="!authService.isAuthenticated()" class="bottom-group float-end">
+    <button type="button" [routerLink]="['/auth/register']" class="btn btn-warning m-2"> <i class="fas fa-id-badge me-1"></i> Registrarme</button>
+    <button type="button" [routerLink]="['/auth/login']" class="btn btn-success"> <i class="fas fa-key me-1"></i> Ingresar</button>
+  </div>
+  <ul *ngIf="authService.isAuthenticated()" class="navbar-nav float-end">
+    <li class="nav-item">
+      <button type="button" [routerLink]="['/productos/form-producto']" class="btn btn-warning m-2"> <i class="fas fa-cubes me-1"></i> Agregar productos</button>
+    </li>
     <li class="nav-item" ngbDropdown placement="bottom-end">
       <a
         ngbDropdownToggle
@@ -105,12 +108,6 @@
           <div class="ms-2">
             <h4 class="mb-0 fs-4">{{authService.usuario.nombreUsuario}}</h4>
             <p class="text-muted mb-0 fs-2">{{authService.usuario.username}}</p>
-            <a
-              *ngIf="!authService.isAuthenticated()"
-              [routerLink]="['/auth/login']"
-              class="btn btn-success btn-rounded btn-sm mt-1"
-              >Ingresar</a
-            >
           </div>
         </div>
         <a class="dropdown-item" [routerLink]="['/usuarios/detalle-perfil', authService.usuario.idUsuario]" *ngIf="authService.isAuthenticated()">

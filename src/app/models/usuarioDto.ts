@@ -9,4 +9,5 @@ export class UsuarioDto {
     imagen: string;
     ciudad: number;
     departamento: number;
+    tipoUsuario: number;
 }

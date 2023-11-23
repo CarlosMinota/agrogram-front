@@ -22,7 +22,6 @@ export class FormProductoComponent implements OnInit {
   public productoCargar: Producto;
   public usuario: Usuario;
   public categorias: Categoria[];
-  public presentacionProducto: PresentacionProducto[];
   public submitted = false;
   public fotoSeleccionada: File;
   public errores: string[];
@@ -32,7 +31,6 @@ export class FormProductoComponent implements OnInit {
     nombreProducto: new FormControl(''),
     precio: new FormControl(''),
     categoria: new FormControl(''),
-    presentacion: new FormControl(''),
     descripcion: new FormControl(''),
     infoProduccion: new FormControl(''),
   })
@@ -57,15 +55,10 @@ export class FormProductoComponent implements OnInit {
       this.categorias = categorias as Categoria[];
     });
 
-    this.productoService.getPresentacionProductos().subscribe(presentacion => {
-      this.presentacionProducto = presentacion as PresentacionProducto[];
-    });
-
     this.form = this.formBuilder.group({
       nombreProducto: ['', Validators.required],
       precio: ['', Validators.required],
       categoria: ['', Validators.required],
-      presentacion: ['', Validators.required],
       descripcion: ['', Validators.required],
       infoProduccion: ['', Validators.required],
     });

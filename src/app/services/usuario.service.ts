@@ -24,9 +24,9 @@ export class UsuarioService {
     return this.httpClient.get(`${this.url}/filtrar-usuarios/${nombreUsuario}`);
   }
 
-  crearUsuario(usuario: Usuario): Observable<Usuario> {
+  crearUsuario(usuario: UsuarioDto): Observable<UsuarioDto> {
     return this.httpClient.post(`${this.url}`, usuario).pipe(
-      map((response: any) => response.usuario as Usuario),
+      map((response: any) => response.usuario as UsuarioDto),
       catchError(err => {
         if (err.status == 400) {
           return throwError(() => err);
@@ -117,5 +117,9 @@ export class UsuarioService {
 
   getCiudadesDepartamento(id: number): Observable<any> {
     return this.httpClient.get(`${this.url}/ciudades-departamento/${id}`)
+  }
+
+  getTipoUsuario(): Observable<any> {
+    return this.httpClient.get(`${this.url}/tipo-usuario`)
   }
 }

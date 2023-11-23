@@ -8,10 +8,10 @@
             </div>
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" [routerLink]="['/auth/register']">Productor</a>
+                    <a class="nav-link" aria-current="page" [routerLink]="['/auth/register']">Productor</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/auth/register-cliente']">Comprador</a>
+                    <a class="nav-link active" [routerLink]="['/auth/register-cliente']">Comprador</a>
                 </li>
             </ul>
             <!-- Form -->
@@ -47,65 +47,6 @@
                                         </div>
                                         <div *ngIf="f['username'].errors['maxlength']">
                                             {{mensajeUsernameMax}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <div class="col-12 ">
-                                    <input class="form-control" type="text" formControlName="telefono"
-                                        [(ngModel)]="usuario.telefono"
-                                        [ngClass]="{ 'is-invalid': submitted && f['telefono'].errors }" name="telefono"
-                                        placeholder="Telefono">
-                                    <div *ngIf="submitted && f['telefono'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['telefono'].errors['required']">
-                                            {{mensaje}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <div class="col-12 ">
-                                    <input class="form-control" type="text" formControlName="email"
-                                        [(ngModel)]="usuario.email"
-                                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" name="email"
-                                        placeholder="Email">
-                                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                        <div *ngIf="f['email'].errors['required']">
-                                            {{mensaje}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <div class="col-12 ">
-                                    <div class="form-group">
-                                        <select class="form-select mr-sm-2" id="inlineFormCustomSelect"
-                                            name="departamento" (change)="selectedOrgMod($event)">
-                                            <option [ngValue]="undefined">Seleccionar departamento</option>
-                                            <option *ngFor="let departamento of departamentos"
-                                                [value]="departamento.idDepartamento">
-                                                {{departamento.nombreDepartamento}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <div class="col-12 ">
-                                    <div class="form-group">
-                                        <select class="form-select mr-sm-2" id="inlineFormCustomSelectd"
-                                            formControlName="ciudad"
-                                            [ngClass]="{ 'is-invalid': submitted && f['ciudad'].errors }"
-                                            [(ngModel)]="usuario.ciudad" name="ciudad">
-                                            <option [ngValue]="undefined">Seleccionar la ciudad</option>
-                                            <option *ngFor="let ciudad of ciudades" [ngValue]="ciudad.idCiudad">
-                                                {{ciudad.nombreCiudad}}</option>
-                                        </select>
-                                        <div *ngIf="submitted && f['ciudad'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['ciudad'].errors['required']">
-                                                {{mensaje}}
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

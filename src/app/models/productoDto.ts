@@ -7,5 +7,4 @@ export class ProductoDto {
     descripcion: string;
     categoria: number;
     usuario: number;
-    presentacionProducto: number;
 }

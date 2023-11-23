@@ -3,6 +3,7 @@ import { UsuarioComponent } from "./usuario.component";
 import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./login/login.component";
 import { PerfilComponent } from "./perfil/perfil.component";
+import { RegisterClienteComponent } from "./register-cliente/register-cliente.component";
 
 export const UsuarioRoutes: Routes = [
     {
@@ -39,6 +40,11 @@ export const UsuarioRoutes: Routes = [
                 path: 'login',
                 component: LoginComponent,
                 title: 'Login'
+            },
+            {
+                path: 'register-cliente',
+                component: RegisterClienteComponent,
+                title: 'Registro de cliente'
             }
         ]
     }

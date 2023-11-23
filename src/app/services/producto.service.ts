@@ -104,8 +104,4 @@ export class ProductoService {
   getCategorias(): Observable<any> {
     return this.httpClient.get(`${this.url}/categoria`)
   }
-
-  getPresentacionProductos(): Observable<any> {
-    return this.httpClient.get(`${this.url}/presentacion-producto`)
-  }
 }
