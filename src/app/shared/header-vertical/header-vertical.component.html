@@ -2,81 +2,134 @@
 <!-- toggle and nav items -->
 <!-- ============================================================== -->
 <ul class="navbar-nav float-start me-auto">
-    <li class="nav-item d-none d-lg-block">
-      <a
-        (click)="toggleSidebar.emit()"
-        class="nav-link sidebartoggler waves-effect waves-light"
-        href="javascript:void(0)"
-      >
-        <i class="ti-menu"></i>
-      </a>
-    </li>
-  </ul>
-  <!-- ============================================================== -->
-  <!-- Right side toggle and nav items -->
-  <!-- ============================================================== -->
-  <div *ngIf="!authService.isAuthenticated()" class="bottom-group float-end">
-    <button type="button" [routerLink]="['/auth/register']" class="btn btn-warning m-2"> <i class="fas fa-id-badge me-1"></i> Registrarme</button>
-    <button type="button" [routerLink]="['/auth/login']" class="btn btn-success"> <i class="fas fa-key me-1"></i> Ingresar</button>
-  </div>
-  <ul *ngIf="authService.isAuthenticated()" class="navbar-nav float-end">
-    <li class="nav-item">
-      <button *ngIf="authService.hasRole('ROLE_VENDEDOR')" type="button" [routerLink]="['/productos/form-producto']" class="btn btn-warning m-2"> <i class="fas fa-cubes me-1"></i> Agregar productos</button>
-    </li>
-    <li class="nav-item" ngbDropdown placement="bottom-end">
-      <a
-        ngbDropdownToggle
-        class="nav-link text-muted waves-effect waves-dark pro-pic"
-        href="javascript:void(0)"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        <img *ngIf="authService.usuario?.imagen"
-          src="{{url}}{{authService.usuario.imagen}}"
-          alt="{{authService.usuario.imagen}}"
-          class="rounded-circle"
-          width="31"
-        />
-        <img *ngIf="!authService.usuario?.imagen"
-          src="{{noImagen}}"
-          alt="Sin foto"
-          class="rounded-circle"
-          width="31"
-        />
-      </a>
-      <div class="dropdown-menu-right user-dd" ngbDropdownMenu>
-        <div class="d-flex no-block align-items-center p-3 mb-2">
-          <div class="">
-            <img *ngIf="authService.usuario?.imagen"
-              src="{{url}}{{authService.usuario.imagen}}"
-              alt="{{authService.usuario.imagen}}"
-              class="rounded"
-              width="70"
-            />
-            <img *ngIf="!authService.usuario?.imagen"
-              src="{{noImagen}}"
-              alt="Sin foto"
-              class="rounded"
-              width="70"
-            />
-          </div>
-          <div class="ms-2">
-            <h4 class="mb-0 fs-4">{{authService.usuario.nombreUsuario}}</h4>
-            <p class="text-muted mb-0 fs-2">{{authService.usuario.username}}</p>
-          </div>
+  <li class="nav-item d-none d-lg-block">
+    <a (click)="toggleSidebar.emit()" class="nav-link sidebartoggler waves-effect waves-light"
+      href="javascript:void(0)">
+      <i class="ti-menu"></i>
+    </a>
+  </li>
+</ul>
+<!-- ============================================================== -->
+<!-- Right side toggle and nav items -->
+<!-- ============================================================== -->
+<div *ngIf="!authService.isAuthenticated()" class="bottom-group float-end">
+  <button type="button" [routerLink]="['/auth/register']" class="btn btn-warning m-2"> <i
+      class="fas fa-id-badge me-1"></i> Registrarme</button>
+  <button type="button" [routerLink]="['/auth/login']" class="btn btn-success"> <i class="fas fa-key me-1"></i>
+    Ingresar</button>
+</div>
+<ul *ngIf="authService.isAuthenticated()" class="navbar-nav float-end">
+  <li class="nav-item">
+    <button *ngIf="authService.hasRole('ROLE_VENDEDOR')" type="button" [routerLink]="['/productos/form-producto']"
+      class="btn btn-warning m-2"> <i class="fas fa-cubes me-1"></i> Agregar productos</button>
+  </li>
+  <li class="nav-item" ngbDropdown placement="bottom-end">
+    <a ngbDropdownToggle class="nav-link text-muted waves-effect waves-dark pro-pic" href="javascript:void(0)"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img *ngIf="authService.usuario?.imagen" src="{{url}}{{authService.usuario.imagen}}"
+        alt="{{authService.usuario.imagen}}" class="rounded-circle" width="31" />
+      <img *ngIf="!authService.usuario?.imagen" src="{{noImagen}}" alt="Sin foto" class="rounded-circle" width="31" />
+    </a>
+    <div class="dropdown-menu-right user-dd" ngbDropdownMenu>
+      <div class="d-flex no-block align-items-center p-3 mb-2">
+        <div class="">
+          <img *ngIf="authService.usuario?.imagen" src="{{url}}{{authService.usuario.imagen}}"
+            alt="{{authService.usuario.imagen}}" class="rounded" width="70" />
+          <img *ngIf="!authService.usuario?.imagen" src="{{noImagen}}" alt="Sin foto" class="rounded" width="70" />
         </div>
-        <a class="dropdown-item" [routerLink]="['/usuarios/detalle-perfil', authService.usuario.idUsuario]" *ngIf="authService.isAuthenticated()">
-          <i class="ti-user me-1 ms-1"></i> Ver mi perfil</a
-        >
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" (click)="logout()" *ngIf="authService.isAuthenticated()">
-          <i class="fa fa-power-off me-1 ms-1"></i> Salir</a
-        >
+        <div class="ms-2">
+          <h4 class="mb-0 fs-4">{{authService.usuario.nombreUsuario}}</h4>
+          <p class="text-muted mb-0 fs-2">{{authService.usuario.username}}</p>
+        </div>
       </div>
-    </li>
-    <!-- ============================================================== -->
-    <!-- User profile and search -->
-    <!-- ============================================================== -->
-  </ul>
-  
+      <a class="dropdown-item" [routerLink]="['/usuarios/detalle-perfil', authService.usuario.idUsuario]"
+        *ngIf="authService.hasRole('ROLE_VENDEDOR')">
+        <i class="ti-user me-1 ms-1"></i> Ver mi perfil</a>
+      <div *ngIf="authService.hasRole('ROLE_COMPRADOR')" class="button-group">
+        <button type="button"
+          class="btn btn-rounded btn-outline-success btn-sm" (click)="modalOpenRegiser(modalRegiser)">
+          Editar perfil
+        </button>
+        <button type="button"
+          class="btn btn-rounded btn-outline-danger btn-sm" (click)="eliminarUsuario(usuario)">
+          Eliminar perfil
+        </button>
+      </div>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" (click)="logout()" *ngIf="authService.isAuthenticated()">
+        <i class="fa fa-power-off me-1 ms-1"></i> Salir</a>
+    </div>
+  </li>
+</ul>
+<ng-template #modalRegiser let-modal>
+  <div class="modal-header">
+      <h5 class="modal-title" id="editUserLabel">Editar perfil</h5>
+
+      <button type="button" class="btn-close" (click)="closeBtnClick()" aria-label="Close"></button>
+  </div>
+
+  <div class="modal-body" style="width: auto;">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="mb-3 row">
+              <label for="name" class="col-sm-4 col-form-label">Nombre completo</label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="nombreUsuario" id="name"
+                      [(ngModel)]="usuarioForm.nombreUsuario"
+                      [ngClass]="{ 'is-invalid': submitted && f['nombreUsuario'].errors }" />
+                  <div *ngIf="submitted && f['nombreUsuario'].errors" class="invalid-feedback">
+                      <div *ngIf="f['nombreUsuario'].errors['required']">{{mensaje}}</div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="mb-3 row">
+              <label for="position" class="col-sm-4 col-form-label">Nombre de usuario</label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="username" id="position"
+                      [(ngModel)]="usuarioForm.username"
+                      [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
+                  <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                      <div *ngIf="f['username'].errors['required']">
+                          {{mensaje}}
+                      </div>
+                      <div *ngIf="f['username'].errors['minlength']">
+                          {{mensajeUsernameMin}}
+                      </div>
+                      <div *ngIf="f['username'].errors['maxlength']">
+                          {{mensajeUsernameMax}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="mb-3 row">
+              <label for="salary" class="col-sm-4 col-form-label">Contraseña</label>
+              <div class="col-sm-8">
+                  <input type="password" class="form-control" formControlName="contrasena" id="contrasena"
+                      [(ngModel)]="usuarioForm.contrasena"
+                      [ngClass]="{ 'is-invalid': submitted && f['contrasena'].errors }" />
+                  <div *ngIf="submitted && f['contrasena'].errors" class="invalid-feedback">
+                      <div *ngIf="f['contrasena'].errors['required']">
+                          {{mensaje}}
+                      </div>
+                      <div *ngIf="f['contrasena'].errors['minlength']">
+                          {{mensajeContrasenaMin}}
+                      </div>
+                      <div *ngIf="f['contrasena'].errors['maxlength']">
+                          {{mensajeContrasenaMax}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="closeBtnClick()">
+                  Salir
+              </button>
+
+              <button type="submit" class="btn btn-primary" (click)="editarUsuario()">
+                  Editar perfil
+              </button>
+          </div>
+      </form>
+  </div>
+</ng-template>
+<notifier-container></notifier-container>
